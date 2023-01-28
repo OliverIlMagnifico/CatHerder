@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatHerder.Data", "CatHerder
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatHerder.Mediatr", "CatHerder.Mediatr\CatHerder.Mediatr.csproj", "{2CD7B317-6B1D-44BA-B710-19B911607AD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatHerder", "CatHerder\CatHerder.csproj", "{BA658BDF-0867-4732-B530-7FB3A6A66220}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatHerder", "CatHerder\CatHerder.csproj", "{BA658BDF-0867-4732-B530-7FB3A6A66220}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{11194565-59AE-4CC4-9C6D-5DF86EEBA123}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{BA658BDF-0867-4732-B530-7FB3A6A66220}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA658BDF-0867-4732-B530-7FB3A6A66220}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA658BDF-0867-4732-B530-7FB3A6A66220}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11194565-59AE-4CC4-9C6D-5DF86EEBA123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11194565-59AE-4CC4-9C6D-5DF86EEBA123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11194565-59AE-4CC4-9C6D-5DF86EEBA123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11194565-59AE-4CC4-9C6D-5DF86EEBA123}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

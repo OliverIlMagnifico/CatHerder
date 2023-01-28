@@ -1,0 +1,75 @@
+﻿@page
+@model CatHerder.Web.Pages.HerdModel
+@{
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.Herd!.Name</h1>
+    <p>Invite others to join your herd @Model.PublicId</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                @foreach (var cat in Model!.Herd!.Cats!)
+                {
+                    <td>@cat.Name</td>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var slot in Model!.Herd!.Calendar!.Slots!)
+            {
+                <tr>
+                    <td>@slot.From.ToLocalTime().ToShortDateString()</td>
+                    @foreach (var cat in Model!.Herd!.Cats!)
+                    {
+                        var catEvent = slot.CatEventModels!.FirstOrDefault(cem => cem.Cat.Id == cat.Id);
+                        if (cat.PublicId == Model.VisitingCatId)
+                        {
+                            <td>
+                            <form method="post">
+                                <input type="hidden" value="@cat.Id" name="catId"/>
+                                <input type="hidden" value="@slot.Id" name="slotId"/>
+                                <input type="hidden" value="@CatHerder.Response.Yes" name="response"/>
+                                <button type="submit">Yes</button>
+                            </form>
+                            <form method="post">
+                                <input type="hidden" value="@cat.Id" name="catId"/>
+                                <input type="hidden" value="@slot.Id" name="slotId"/>
+                                <input type="hidden" value="@CatHerder.Response.No" name="response"/>
+                                <button type="submit">No</button>
+                            </form>
+                            <form method="post">
+                                <input type="hidden" value="@cat.Id" name="catId" />
+                                <input type="hidden" value="@slot.Id" name="slotId" />
+                                <input type="hidden" value="@CatHerder.Response.Maybe" name="response" />
+                                <button type="submit">Maybe</button>
+                            </form>
+                            </td>
+   @*                         if (catEvent == null)
+                            {
+                                <td></td>
+                            }
+                            else
+                            {
+                                <td>@catEvent.Response Me</td>
+                            }*@
+                        }
+                        else
+                        {
+                            if (catEvent == null)
+                            {
+                                <td>null</td>
+                            }
+                            else
+                            {
+                                <td>@catEvent.Response</td>
+                            }
+                        }
+
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

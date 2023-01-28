@@ -2,7 +2,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace CatHerder.Data.Entities;
-public class Herd : IHasId
+public class Herd : IHasId, IHasPublicId
 {
     [BsonId]
     public ObjectId Id { get; set; }

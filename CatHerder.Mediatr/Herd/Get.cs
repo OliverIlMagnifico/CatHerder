@@ -1,35 +1,36 @@
+using CatHerder.Data;
+using CatHerder.Mediatr.Pipelines;
+using FluentValidation;
+using MediatR;
+
 namespace CatHerder.Mediatr.Herd;
 
-public class Get
+public class Get : IRequestHandler<Get.Request, HerdModel>
 {
-}
+    private readonly ICrud _crud;
 
-public class Create
-{
+    public Get(ICrud crud)
+    {
+        _crud = crud;
+    }
 
-}
+    public async Task<HerdModel> Handle(Request request, CancellationToken cancellationToken)
+    {
+        var herd = await _crud.GetAsync<CatHerder.Data.Entities.Herd>(request.PublicId, cancellationToken);
 
-public class GetPage
-{
+        return await herd.FromEntity(_crud, cancellationToken);
+    }
 
-}
+    public class Request : IRequest<HerdModel>
+    {
+        public Guid PublicId { get; set; }
+    }
 
-public class AddCat
-{
-
-}
-
-public class RemoveCat
-{
-
-}
-
-public class Delete
-{
-
-}
-
-public class Analyse
-{
-
+    public class Validation : ValidationBase<Request>, IValidationHandler<Request, HerdModel>
+    {
+        public Validation()
+        {
+            RuleFor(x => x.PublicId).NotEqual(new Guid());
+        }
+    }
 }

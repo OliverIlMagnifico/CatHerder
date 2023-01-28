@@ -18,6 +18,14 @@ public class MongoCrud : ICrud
         await collection.InsertOneAsync(toAdd, null, cancellationToken);
         return toAdd;
     }
+    public async Task<T> UpdateAsync<T>(T toEdit, CancellationToken cancellationToken) where T : IHasId
+    {
+        var filter = Builders<T>.Filter.Eq(x => x.Id, toEdit.Id);
+
+        var collection = _context.GetCollection<T>();
+        await collection.ReplaceOneAsync(filter, toEdit, cancellationToken: cancellationToken);
+        return toEdit;
+    }
 
     public async Task<long> CountAsync<T>(CancellationToken cancellationToken)
     {
@@ -47,6 +55,15 @@ public class MongoCrud : ICrud
 
         var collection = _context.GetCollection<T>();
         return await collection.Find<T>(filterDefinition, null).Skip(skip).Limit(take).ToListAsync(cancellationToken);
+    }
+
+    public async Task<T> GetAsync<T>(Guid publicId, CancellationToken cancellationToken) where T : IHasPublicId
+    {
+        var filterDefinition = Builders<T>.Filter.Eq(x => x.PublicId, publicId);
+
+        var collection = _context.GetCollection<T>();
+        var result = await collection.FindAsync<T>(filterDefinition, null, cancellationToken);
+        return result.FirstOrDefault();
     }
 
     public async Task<IEnumerable<T>> GetPageAsync<T>(CancellationToken cancellationToken, int skip = 0, int take = 50)

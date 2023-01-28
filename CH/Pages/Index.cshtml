@@ -9,5 +9,29 @@
 
 	<p>Herd your cats</p>
 
-	<
+	<form method="post">
+        <input type="text" asp-for="Name" placeholder="Choose a name for your herd" /><br />
+        <input type="text" asp-for="FirstCat" placeholder="Choose a name for yourself"/><br />
+        <input type="checkbox" id="sunday" asp-for="Sunday">
+        <label for="sunday">Sunday</label><br>
+        <input type="checkbox" id="monday" asp-for="Monday">
+        <label for="Monday">Monday</label><br>
+        <input type="checkbox" id="tuesday" asp-for="Tuesday">
+        <label for="tuesday">Tuesday</label><br>
+        <input type="checkbox" id="wednesday" asp-for="Wednesday">
+        <label for="wednesday">Wednesday</label><br>
+        <input type="checkbox" id="thursday" asp-for="Thursday">
+        <label for="thursday">Thursday</label><br>
+        <input type="checkbox" id="friday" asp-for="Friday">
+        <label for="friday">Friday</label><br>
+        <input type="checkbox" id="saturday" asp-for="Saturday">
+        <label for="saturday">Saturday</label><br>
+
+        <select id="months" asp-for="Months" asp-items="Model.MonthOptions">
+            
+        </select>
+        <label for="months">Months ahead</label>
+
+        <button type="submit">Submit</button>
+    </form>
 </div>

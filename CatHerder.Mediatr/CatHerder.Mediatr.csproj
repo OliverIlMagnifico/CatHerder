@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -12,5 +12,9 @@
         <PackageReference Include="FluentValidation" Version="8.4.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\CatHerder.Data\CatHerder.Data.csproj" />
+      <ProjectReference Include="..\CatHerder\CatHerder.csproj" />
     </ItemGroup>
 </Project>

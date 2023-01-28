@@ -8,7 +8,6 @@ public static class Extensions
     {
         var result = new CalendarModel()
         {
-            Name = calendar.Name,
             Start = calendar.Start,
             End = calendar.End,
             Id = calendar.Id.ToString(),
@@ -29,6 +28,7 @@ public static class Extensions
         {
             From = slot.Start,
             To = slot.End,
+            Id = slot.Id.ToString(),
             CatEventModels = (await (slot?.CatEvents ?? new List<ObjectId>(0)).SelectAsync(async id =>
             {
                 var catEvent = await crud.GetAsync<CatEvent>(id, cancellationToken);

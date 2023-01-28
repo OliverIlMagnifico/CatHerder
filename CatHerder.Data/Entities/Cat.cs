@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace CatHerder.Data.Entities;
 
-public class Cat : IHasId
+public class Cat : IHasId, IHasPublicId
 {
     [BsonId]
     public ObjectId Id { get; set; }

@@ -1,7 +1,26 @@
+using CatHerder;
+using CatHerder.Data;
+using CatHerder.Mediatr;
+using Microsoft.AspNetCore.Components.Server.Circuits;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddLogging(l => l.AddConsole());
+builder.Services.AddSingleton<ILogger>(c =>
+    c.GetService<ILoggerFactory>()?.CreateLogger("base")
+);
+Injection.Register(builder.Services);
+builder.Services.AddSingleton<MongoConfiguration>(i => {
+    var mongoConfig = new MongoConfiguration();
+    builder.Configuration.GetSection("mongo").Bind(mongoConfig);
+    return mongoConfig;
+}
+);
+
+builder.Services.AddSingleton<MongoContext>();
+builder.Services.AddSingleton<ICrud, MongoCrud>();
 
 var app = builder.Build();
 
