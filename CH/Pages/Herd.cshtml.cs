@@ -27,13 +27,15 @@ namespace CatHerder.Web.Pages
             Herd = await _mediator.Send(new CatHerder.Mediatr.Herd.Get.Request { PublicId = PublicId });
         }
 
-        public async Task OnPost(string catId, string slotId, Response response)
+        public async Task<IActionResult> OnPost(string catId, string slotId, Response response)
         {
             await _mediator.Send(new CatHerder.Mediatr.Herd.Cat.AddEntry.Request() {
                 Response= response,
                 CatId= catId,
                 SlotId= slotId
             });
+
+            return RedirectToPage(new { PublicId, VisitingCatId });
         }
     }
 }

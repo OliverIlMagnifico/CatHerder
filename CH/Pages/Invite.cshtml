@@ -1,0 +1,14 @@
+﻿@page 
+@model CatHerder.Web.Pages.InviteModel
+@{
+}
+<div class="text-center">
+    <h1 class="display-4">Welcome to Cat Herder</h1>
+    <p></p>
+
+    <form method="post">
+        <input type="hidden" asp-for=PublicId/>
+        <input type="text" asp-for="Name" placeholder="Your name" />
+        <button type="submit">Join</button>
+    </form>
+</div>

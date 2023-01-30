@@ -23,12 +23,20 @@ public class AddCat : IRequestHandler<AddCat.Request, Guid>
 
         await _crud.AddAsync(cat, cancellationToken);
 
+        var herd = await _crud.GetAsync<CatHerder.Data.Entities.Herd>(request.HerdPublicId, cancellationToken);
+
+        herd!.CatIds!.Add(cat.Id);
+
+        await _crud.UpdateAsync(herd, cancellationToken);
+
         return cat.PublicId;
     }
 
     public class Request : IRequest<Guid>
     {
         public string? Name { get; set; }
+
+        public Guid HerdPublicId { get; set; }
     }
 
     public class Validation : ValidationBase<Request>, IValidationHandler<Request, Guid>

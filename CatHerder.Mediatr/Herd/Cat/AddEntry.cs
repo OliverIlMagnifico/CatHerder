@@ -28,9 +28,19 @@ public class AddEntry : IRequestHandler<AddEntry.Request>
             {
                 catEvent.Response = request.Response;
                 await _crud.UpdateAsync<CatEvent>(catEvent, cancellationToken);
-                break;
+                return Unit.Value;
             }
         }
+
+        var newCatEvent = new CatEvent()
+        {
+            CatId = objectCatId,
+            Response = request.Response            
+        };
+
+        await _crud.AddAsync<CatEvent>(newCatEvent, cancellationToken);
+        slot.CatEvents!.Add(newCatEvent.Id);
+        await _crud.UpdateAsync(slot, cancellationToken);
 
         return Unit.Value;
     }

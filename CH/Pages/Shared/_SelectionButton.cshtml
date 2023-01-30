@@ -1,0 +1,26 @@
+﻿@using CatHerder;
+@model (string catId, string slotId, Response response, Response? selectedResponse)
+
+<form method="post">
+    <input type="hidden" value="@Model.catId" name="catId" />
+    <input type="hidden" value="@Model.slotId" name="slotId" />
+    <input type="hidden" value="@Model.response" name="response" />
+
+    @if (Model.selectedResponse.HasValue)
+    {
+        if (Model.selectedResponse.Value == Model.response)
+        {
+            <button disabled type="submit">@Model.response</button>
+        }
+        else
+        {
+            <button type="submit">@Model.response</button>
+
+        }
+    }
+    else
+    {
+        <button type="submit">@Model.response</button>
+
+    }
+</form>

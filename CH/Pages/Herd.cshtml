@@ -6,10 +6,11 @@
 <div class="text-center">
     <h1 class="display-4">@Model.Herd!.Name</h1>
     <p>Invite others to join your herd @Model.PublicId</p>
-
+    <a asp-page="/Analyse" asp-route-PublicId="@Model.PublicId" >Analyse</a>
     <table class="table">
         <thead>
             <tr>
+                <td>&nbsp;</td>
                 @foreach (var cat in Model!.Herd!.Cats!)
                 {
                     <td>@cat.Name</td>
@@ -27,33 +28,19 @@
                         if (cat.PublicId == Model.VisitingCatId)
                         {
                             <td>
-                            <form method="post">
-                                <input type="hidden" value="@cat.Id" name="catId"/>
-                                <input type="hidden" value="@slot.Id" name="slotId"/>
-                                <input type="hidden" value="@CatHerder.Response.Yes" name="response"/>
-                                <button type="submit">Yes</button>
-                            </form>
-                            <form method="post">
-                                <input type="hidden" value="@cat.Id" name="catId"/>
-                                <input type="hidden" value="@slot.Id" name="slotId"/>
-                                <input type="hidden" value="@CatHerder.Response.No" name="response"/>
-                                <button type="submit">No</button>
-                            </form>
-                            <form method="post">
-                                <input type="hidden" value="@cat.Id" name="catId" />
-                                <input type="hidden" value="@slot.Id" name="slotId" />
-                                <input type="hidden" value="@CatHerder.Response.Maybe" name="response" />
-                                <button type="submit">Maybe</button>
-                            </form>
+                                @await Html.PartialAsync(
+                    "_SelectionButton",
+                    (cat.Id, slot.Id, CatHerder.Response.Yes, catEvent?.Response)
+                    )
+                                @await Html.PartialAsync(
+                    "_SelectionButton",
+                    (cat.Id, slot.Id, CatHerder.Response.No, catEvent?.Response)
+                    )                                    @await Html.PartialAsync(
+                    "_SelectionButton",
+                    (cat.Id, slot.Id, CatHerder.Response.Maybe, catEvent?.Response)
+                    )
+
                             </td>
-   @*                         if (catEvent == null)
-                            {
-                                <td></td>
-                            }
-                            else
-                            {
-                                <td>@catEvent.Response Me</td>
-                            }*@
                         }
                         else
                         {
@@ -63,7 +50,11 @@
                             }
                             else
                             {
-                                <td>@catEvent.Response</td>
+                                <td>@await Html.PartialAsync(
+                    "_OthersSelectionButton",
+                    (catEvent.Response)
+                    )
+                               </td>
                             }
                         }
 

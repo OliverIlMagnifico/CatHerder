@@ -1,0 +1,18 @@
+﻿@page
+@model CatHerder.Web.Pages.AnalyseModel
+@{
+}
+
+<div class="text-center">
+    <p>Based on responses so far your best times are:</p>
+    <ul>
+        @foreach (var slot in Model?.BestSlots ?? new CatHerder.ISlot[0])
+        {
+            <li>
+                @slot.From 
+
+            </li>
+        }
+    </ul>
+
+</div>
